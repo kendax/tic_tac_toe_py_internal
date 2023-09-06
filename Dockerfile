@@ -4,24 +4,18 @@
 # We Use an official Python runtime as a parent image
 FROM python:3.7
 
-# Allows docker to cache installed dependencies between builds
-COPY requirements.txt requirements.txt
-#RUN pip install --no-cache-dir -r requirements.txt
-#RUN pip3 install -r requirements.txt
+# Installs Django 
 RUN pip3 install django
 
 # Mounts the application code to the image
 COPY . code
 WORKDIR /code
 
-
-
-
+# Open up port 8000 in the container which is the port Django uses by default to run the server
 EXPOSE 8000
 
-#RUN cd /code/tic_tac_toe_py
+# Create tables in the project database so that we can use database tables
 RUN python /code/tic_tac_toe_py/manage.py migrate
-#RUN cd ..
 
 # runs the production server
 ENTRYPOINT ["python", "tic_tac_toe_py/manage.py"]
