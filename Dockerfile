@@ -19,9 +19,9 @@ WORKDIR /code
 
 EXPOSE 8000
 
-RUN cd /code/tic_tac_toe_py
-RUN python manage.py migrate
-RUN cd ..
+#RUN cd /code/tic_tac_toe_py
+RUN python /code/tic_tac_toe_py/manage.py migrate
+#RUN cd ..
 
 # runs the production server
 ENTRYPOINT ["python", "tic_tac_toe_py/manage.py"]
