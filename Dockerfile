@@ -14,12 +14,14 @@ RUN pip3 install django
 COPY . code
 WORKDIR /code
 
-RUN cd /code/tic_tac_toe_py
-RUN python3 manage.py migrate
-RUN cd ..
+
 
 
 EXPOSE 8000
+
+RUN cd /code/tic_tac_toe_py
+RUN python manage.py migrate
+RUN cd ..
 
 # runs the production server
 ENTRYPOINT ["python", "tic_tac_toe_py/manage.py"]
