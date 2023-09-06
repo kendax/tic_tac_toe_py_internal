@@ -9,7 +9,7 @@ COPY requirements.txt requirements.txt
 #RUN pip install --no-cache-dir -r requirements.txt
 #RUN pip3 install -r requirements.txt
 RUN pip3 install django
-RUN tic_tac_toe_py/python3 manage.py migrate
+RUN python3 tic_tac_toe_py/manage.py migrate
 
 # Mounts the application code to the image
 COPY . code
