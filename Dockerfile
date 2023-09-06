@@ -9,13 +9,15 @@ COPY requirements.txt requirements.txt
 #RUN pip install --no-cache-dir -r requirements.txt
 #RUN pip3 install -r requirements.txt
 RUN pip3 install django
-RUN cd /tic_tac_toe_py
-RUN python manage.py migrate
-RUN cd ..
 
 # Mounts the application code to the image
 COPY . code
 WORKDIR /code
+
+RUN cd /tic_tac_toe_py
+RUN python manage.py migrate
+RUN cd ..
+
 
 EXPOSE 8000
 
