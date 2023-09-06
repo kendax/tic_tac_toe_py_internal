@@ -15,7 +15,7 @@ COPY . code
 WORKDIR /code
 
 RUN cd /code/tic_tac_toe_py
-RUN python manage.py migrate
+RUN python3 manage.py migrate
 RUN cd ..
 
 
