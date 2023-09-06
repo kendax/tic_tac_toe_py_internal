@@ -14,7 +14,7 @@ RUN pip3 install django
 COPY . code
 WORKDIR /code
 
-RUN cd /tic_tac_toe_py
+RUN cd /code/tic_tac_toe_py
 RUN python manage.py migrate
 RUN cd ..
 
