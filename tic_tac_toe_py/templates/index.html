@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>TicTacToe game</title>
+    <style>
+        @import url(//fonts.googleapis.com/css?family=Roboto&display=swap);
+        @import url(//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css);
+
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body, input, button {
+            font-family: 'Roboto', Arial, Helvetica, sans-serif;
+            font-size: 12pt;
+            color: #333;
+        }
+
+        input[type=text] {
+            border-radius: 10px;
+            border: 1px solid #eee;
+            margin: 3px 0;
+            width: 265px;
+            padding: 8px 5px;
+        }
+
+        button {
+            background-color: #ff3111;
+            color: #FFF;
+            border: 0;
+            border-radius: 10px;
+            padding: 1em 2em;
+            cursor: pointer;
+        }
+
+        button[disabled] {
+            cursor: not-allowed;
+            opacity: .5;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .welcome h1,
+        .welcome h2 {
+            text-align: center;
+        }
+
+        .welcome input {
+            width: 100%;
+        }
+
+        .wrapper td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .tic-tac-toe {
+            margin: 3em;
+        }
+
+        .tic-tac-toe td {
+            border: 1px solid white;
+            width: 100px;
+            height: 100px;
+        }
+
+        .tic-tac-toe .vertical-border {
+            border-left-color: #eee;
+            border-right-color: #eee;
+        }
+
+        .tic-tac-toe .horizontal-border {
+            border-top-color: #eee;
+            border-bottom-color: #eee;
+        }
+
+        .tic-tac-toe .center-border {
+            border-color: #eee;
+        }
+
+        .welcome .player-name {
+            margin: 30px 0;
+        }
+
+        .reset-btn {
+            display: inline-block;
+            font-size: 8pt;
+            color: red;
+            margin-top: 30px;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            width: 310px;
+            margin: 15px auto;
+            background-color: brown;
+            color: rgb(4, 19, 49);
+        }
+
+        .cells {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 100px;
+            height: 100px;
+            box-shadow: 2px 2px 2px 2px rgb(20, 132, 132);
+            border: 2px solid rgb(20, 132, 132);
+            cursor: pointer;
+            line-height: 100px;
+            font-size: 60px;
+        }
+
+        .game-title {
+            font-size: 100px;
+            color: burlywood;
+            margin: 15px auto;
+        }
+
+        .language-implementation {
+            font-size: 30px;
+            color: burlywood;
+            margin: 15px auto;
+        }
+
+        .game-status {
+            font-size: 50px;
+            margin: 25px auto;
+            color: tomato;
+        }
+
+        .game-restart {
+            background-color: rgb(251, 128, 5);
+            width: 200px;
+            height: 50px;
+            font-size: 25px;
+            color: rgb(4, 20, 24);
+            box-shadow: 2px 2px 2px 2px rgb(103, 1, 17);
+            border: 2px solid rgb(103, 1, 17);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+<h1 class="game-title">Tic-tac-toe</h1>
+<h2 class="language-implementation">Program logic implemented in Python</h2>
+<form action="postinput/" method="post">
+    {% csrf_token %} <!-- Cross site request forgery protection token -->
+    <div class="game-grid">
+        <div data-cell-index="0" class="cells">
+            {% if gamestate0 == "X" %}
+                X
+            {% elif gamestate0 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell0" value="0" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+        <div data-cell-index="1" class="cells">
+             {% if gamestate1 == "X" %}
+                X
+            {% elif gamestate1 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell1" value="1" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+        <div data-cell-index="2" class="cells">
+             {% if gamestate2 == "X" %}
+                X
+            {% elif gamestate2 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell2" value="2" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+        <div data-cell-index="3" class="cells">
+             {% if gamestate3 == "X" %}
+                X
+            {% elif gamestate3 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell3" value="3" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+        <div data-cell-index="4" class="cells">
+            {% if gamestate4 == "X" %}
+                X
+            {% elif gamestate4 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell4" value="4" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+        <div data-cell-index="5" class="cells">
+             {% if gamestate5 == "X" %}
+                X
+            {% elif gamestate5 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell5" value="5" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+        <div data-cell-index="6" class="cells">
+            {% if gamestate6 == "X" %}
+                X
+            {% elif gamestate6 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell6" value="6" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+        <div data-cell-index="7" class="cells">
+             {% if gamestate7 == "X" %}
+                X
+            {% elif gamestate7 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell7" value="7" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+        <div data-cell-index="8" class="cells">
+             {% if gamestate8 == "X" %}
+                X
+            {% elif gamestate8 == "O" %}
+                O
+            {% else %}
+                <input type="radio" id="btn" name="cell8" value="8" {{ disable }} onclick="document.querySelector('#play-btn').click();"/>
+            {% endif %}
+        </div>
+    </div>
+    <h3 class="game-status" >{{ gamestatus }}</h3>
+    <button type="submit" name="playButton" id="play-btn" value="submitted" hidden>Play</button>
+    <input type="submit" name="restartButton" value="Restart Button" class="game-restart"/>
+</form>
+</div>
+</body>
+</html>
+
